@@ -277,9 +277,14 @@ class MultiEditDialog(BaseDialog):
 class MusicDBApp(tk.Tk):
     def __init__(self):
         super().__init__()
+        try:
+            icon = tk.PhotoImage(file="music_manager_icon.png")
+            self.iconphoto(False, icon)
+        except Exception as e:
+            log_error(f"Failed to load icon: {e}")
         log_debug("Initializing MusicDBApp")
-        self.title("Music Manager v2.0")
-        self.geometry("800x600")
+        self.title("Music Manager")
+        self.geometry("1000x600")
         self.db = load_db()
         log_debug(f"Database loaded with {len(self.db)} records")
         self.sort_info = {"column": None, "reverse": False}
