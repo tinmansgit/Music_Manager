@@ -7,7 +7,7 @@ from my_logger import log_error, log_debug
 
 DB_FILENAME = "music_db.json"
 EXTS = ('.mp3', '.ogg', '.oga', '.flac')
-PLAYME_SCRIPT = "/home/coder/bin/Python/PlayMe/main.py"
+PLAYME_SCRIPT = "/path/to/your/bin/Python/PlayMe/main.py"
 
 def load_db():
     log_debug("Attempting to load database.")
@@ -278,7 +278,7 @@ class MusicDBApp(tk.Tk):
     def __init__(self):
         super().__init__()
         try:
-            icon = tk.PhotoImage(file="music_manager_icon.png")
+            icon = tk.PhotoImage(file="/path/to/your/music_manager_icon.png")
             self.iconphoto(False, icon)
         except Exception as e:
             log_error(f"Failed to load icon: {e}")
@@ -364,9 +364,7 @@ class MusicDBApp(tk.Tk):
                 size_mb = f"{size_bytes/(1024*1024):.2f} MB"
             except Exception:
                 size_mb = ""
-            self.tree.insert("", tk.END, iid=r["full_path"],
-                             values=(r["artist"], r["title"], r["album"], r["tracknumber"], size_mb, r["file_name"], r["full_path"]),
-                             tags=(tag,))
+            self.tree.insert("", tk.END, iid=r["full_path"],values=(r["artist"], r["title"], r["album"], r["tracknumber"], size_mb, r["file_name"], r["full_path"]),tags=(tag,))
             log_debug(f"Inserted record: {r['full_path']} with tag: {tag}")
         self.total_label.config(text=f"Total Files: {len(self.db)}")
         log_debug(f"Total files displayed: {len(self.db)}")
@@ -517,10 +515,6 @@ class MusicDBApp(tk.Tk):
             messagebox.showerror("PlayMe", f"Error: {e}")
 
     def handle_save_to_file(self):
-        """
-        Iterate over each record in the database and update the metadata
-        on the corresponding audio file.
-        """
         log_debug("Triggered handle_save_to_file")
         updated = 0
         for rec in self.db.values():
@@ -533,7 +527,6 @@ class MusicDBApp(tk.Tk):
                 if audio is None:
                     log_error(f"Mutagen could not open file: {fp}")
                     continue
-                # Update tags based on the database record.
                 for tag in ("artist", "title", "album", "tracknumber"):
                     value = rec.get(tag, "")
                     if value:
