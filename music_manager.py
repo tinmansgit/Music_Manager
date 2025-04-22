@@ -5,9 +5,9 @@ from mutagen import File
 import music_manager_logger
 from music_manager_logger import log_error, log_debug
 
-DB_FILENAME = "/home/coder/bin/Python/Music_Manager/music_db.json"
+DB_FILENAME = "/bin/Python/Music_Manager/music_db.json"
 EXTS = ('.mp3', '.ogg', '.oga', '.flac')
-PLAYME_SCRIPT = "/home/coder/bin/Python/PlayMe/playme.py"
+PLAYME_SCRIPT = "/bin/Python/PlayMe/playme.py"
 
 def load_db():
     log_debug("Attempting to load database.")
@@ -278,7 +278,7 @@ class MusicDBApp(tk.Tk):
     def __init__(self):
         super().__init__()
         try:
-            icon = tk.PhotoImage(file="/home/coder/bin/Python/Music_Manager/music_manager_icon.png")
+            icon = tk.PhotoImage(file="/bin/Python/Music_Manager/music_manager_icon.png")
             self.iconphoto(False, icon)
         except Exception as e:
             log_error(f"Failed to load icon: {e}")
