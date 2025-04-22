@@ -2,12 +2,12 @@
 import os, json, subprocess, tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from mutagen import File
-import my_logger
-from my_logger import log_error, log_debug
+import music_manager_logger
+from music_manager_logger import log_error, log_debug
 
-DB_FILENAME = "music_db.json"
+DB_FILENAME = "/bin/Python/Music_Manager/music_db.json"
 EXTS = ('.mp3', '.ogg', '.oga', '.flac')
-PLAYME_SCRIPT = "/home/coder/bin/Python/PlayMe/main.py"
+PLAYME_SCRIPT = "/bin/Python/PlayMe/playme.py"
 
 def load_db():
     log_debug("Attempting to load database.")
@@ -278,7 +278,7 @@ class MusicDBApp(tk.Tk):
     def __init__(self):
         super().__init__()
         try:
-            icon = tk.PhotoImage(file="music_manager_icon.png")
+            icon = tk.PhotoImage(file="/bin/Python/Music_Manager/music_manager_icon.png")
             self.iconphoto(False, icon)
         except Exception as e:
             log_error(f"Failed to load icon: {e}")
@@ -301,7 +301,6 @@ class MusicDBApp(tk.Tk):
         
         toolbar = ttk.Frame(self)
         toolbar.pack(fill="x", padx=5, pady=5)
-        # Added "Save to File" button for writing metadata to individual song files.
         for (txt, cmd) in [("Import Directory", self.handle_import_directory),
                            ("Add File", self.handle_add_file),
                            ("Add Manually", self.handle_add_entry),
@@ -517,10 +516,6 @@ class MusicDBApp(tk.Tk):
             messagebox.showerror("PlayMe", f"Error: {e}")
 
     def handle_save_to_file(self):
-        """
-        Iterate over each record in the database and update the metadata
-        on the corresponding audio file.
-        """
         log_debug("Triggered handle_save_to_file")
         updated = 0
         for rec in self.db.values():
@@ -533,7 +528,6 @@ class MusicDBApp(tk.Tk):
                 if audio is None:
                     log_error(f"Mutagen could not open file: {fp}")
                     continue
-                # Update tags based on the database record.
                 for tag in ("artist", "title", "album", "tracknumber"):
                     value = rec.get(tag, "")
                     if value:

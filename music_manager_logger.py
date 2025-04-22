@@ -1,7 +1,7 @@
 import logging
 
-error_log_file = 'log_music_manager_error.log'
-debug_log_file = 'log_music_manager_debug.log'
+error_log_file = '/bin/Python/Music_Manager/log_music_manager_error.log'
+debug_log_file = '/bin/Python/Music_Manager/log_music_manager_debug.log'
 
 logger = logging.getLogger('app_logger')
 logger.setLevel(logging.DEBUG)
