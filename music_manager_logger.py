@@ -1,7 +1,9 @@
 import logging
+from datetime import datetime
 
-error_log_file = '/bin/Python/Music_Manager/log_music_manager_error.log'
-debug_log_file = '/bin/Python/Music_Manager/log_music_manager_debug.log'
+current_date = datetime.now().strftime('%Y-%m-%d')
+error_log_file = f'~/bin/Python/Music_Manager/log_error_music_manager_{current_date}.log'
+debug_log_file = f'~/bin/Python/Music_Manager/log_debug_music_manager_{current_date}.log'
 
 logger = logging.getLogger('app_logger')
 logger.setLevel(logging.DEBUG)
