@@ -1,6 +1,6 @@
 # Music Manager written in Python
 
-Music catalog using PlayMe to play audio files.<br />
+Music catalog using PlayMe to play audio files and streams.<br />
 Mp3, Ogg, Flac<br />
 <br />
 Import Directory: import entire music directory and sub directories.<br />
